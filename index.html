@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Escalonamento de Biorreatores</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.26.1/full/pyodide.js"></script>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle" title="Alternar tema" aria-label="Alternar tema">
+        <i class="fas fa-moon" id="theme-icon"></i>
+    </button>
+    <header>
+        <h1>Calculadora de Escalonamento de Biorreatores</h1>
+    </header>
+
+    <main>
+        <div class="calculator-grid">
+            <section class="card inputs-card">
+                <h2>Parâmetros de Entrada</h2>
+                
+                <div class="scale-columns">
+                    <div class="scale-column">
+                        <h3>Escala 1 (Bancada/Piloto)</h3>
+                        <label for="n1">Rotação (N₁)</label>
+                        <input type="number" id="n1" placeholder="RPM" value="700">
+                        
+                        <label for="di1">Diâmetro do Impelidor (Di₁)</label>
+                        <input type="number" id="di1" placeholder="metros" value="0.1">
+                        
+                        <label for="v1" class="kla-input">Volume (V₁)</label>
+                        <input type="number" id="v1" class="kla-input" placeholder="Litros" value="10">
+                    </div>
+                    
+                    <div class="scale-column">
+                        <h3>Escala 2 (Industrial)</h3>
+                        <label for="di2">Diâmetro do Impelidor (Di₂)</label>
+                        <input type="number" id="di2" placeholder="metros" value="0.794">
+                        
+                         <label for="v2" class="kla-input">Volume (V₂)</label>
+                        <input type="number" id="v2" class="kla-input" placeholder="Litros" value="5000">
+                    </div>
+                </div>
+
+                <label for="criteria">Critério de Escalonamento</label>
+                <select id="criteria">
+                    <option value="pv" selected>Potência/Volume (P/V) Constante</option>
+                    <option value="vtip">Velocidade de Ponta (v_tip) Constante</option>
+                    <option value="tm">Tempo de Mistura (t_m) Constante</option>
+                    <option value="flow">Vazão de Bombeamento (F_L/V) Constante</option>
+                    <option value="reynolds">Número de Reynolds (N_Re) Constante</option>
+                    <option value="kla">Coeficiente de Transf. de O₂ (kLa) Constante</option>
+                </select>
+
+                <div id="kla-options" class="kla-input">
+                    <label for="fluid-type">Tipo de Fluido (para kLa)</label>
+                    <select id="fluid-type">
+                        <option value="coalescing">Coalescente (A=0.4, B=0.5)</option>
+                        <option value="non-coalescing">Não Coalescente (A=0.7, B=0.2)</option>
+                    </select>
+                    <label for="aeration-rate">Taxa de Aeração (vvm)</label>
+                    <input type="number" id="aeration-rate" value="0.3" placeholder="vvm">
+                </div>
+
+                <button id="calculate-btn">Calcular</button>
+            </section>
+
+            <section class="card results-card">
+                <h2>Resultados para a Escala 2</h2>
+                <div class="primary-result">
+                    <span>Rotação (N₂)</span>
+                    <p id="result-n2">- RPM</p>
+                </div>
+                <h3>Análise de Consequências</h3>
+                <p class="info">Como outros parâmetros se comportam na nova rotação calculada.</p>
+                <table id="consequences-table">
+                    <thead>
+                        <tr>
+                            <th>Parâmetro</th>
+                            <th>Relação (Escala 2 / Escala 1)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Desenvolvido por <strong>Emerson Willian Danzer</strong></p>
+            <div class="social-links">
+                <a href="https://github.com/ewdanzer" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/emerson-danzer" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <div class="collab-links">
+                <span>Conheça outros projetos em que estou envolvido:</span>
+                <a href="https://www.instagram.com/igem_synfronteras" target="_blank">iGEM SynFronteras</a>
+                <a href="https://www.instagram.com/rsg_brazil" target="_blank">RSG-Brazil</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
